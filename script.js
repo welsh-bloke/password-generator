@@ -119,39 +119,36 @@ let options = {
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  inputNumberOfCharacters = prompt('Please choose the number of characters for your password (between 10 and 64 inclusive)');
-
-  if (options.inputNotEntered(inputNumberOfCharacters)) {
-    alert('You did not enter a enter a value for the number of characters. Please try again');
-    return;
-  } else if (options.inputIsNotANumber(inputNumberOfCharacters)) {
-    alert('You did not enter a number. Please try again');
-    return;
-  } else if (options.lengthIsTooShort(inputNumberOfCharacters)) {
-    alert('Your password must be at least 10 characters. Please try again');
-    return;
-  } else if (options.lengthIsTooLong(inputNumberOfCharacters)) {
-    alert('Your password must be less than 65 characters. Please try again');
-    return;
-  } else {
-    options.numberOfCharacters = inputNumberOfCharacters;
-  }
-
   while(options.noCharacterTypeSelected()) {
-    options.useNumericCharacters = confirm('Would you like to include numeric characters)');
-    options.useLowerCaseCharacters = confirm('Would you like to include lower case characters)');
-    options.useUpperCaseCharacters = confirm('Would you like to include upper case characters)');
-    options.useSpecialCharacters = confirm('Would you like to include special characters)');
+    inputNumberOfCharacters = prompt('Please choose the number of characters for your password (between 10 and 64 inclusive)');
 
-    if (options.noCharacterTypeSelected()) {
-      alert('You must choose at least 1 character type. Please try again');
+    if (options.inputNotEntered(inputNumberOfCharacters)) {
+      alert('You did not enter a enter a value for the number of characters. Please try again');
       continue;
+    } else if (options.inputIsNotANumber(inputNumberOfCharacters)) {
+      alert('You did not enter a number. Please try again');
+      continue;
+    } else if (options.lengthIsTooShort(inputNumberOfCharacters)) {
+      alert('Your password must be at least 10 characters. Please try again');
+      continue;
+    } else if (options.lengthIsTooLong(inputNumberOfCharacters)) {
+      alert('Your password must be less than 65 characters. Please try again');
+      continue;
+    } else {
+      options.numberOfCharacters = inputNumberOfCharacters;
+      while(options.noCharacterTypeSelected()) {
+        options.useNumericCharacters = confirm('Would you like to include numeric characters)');
+        options.useLowerCaseCharacters = confirm('Would you like to include lower case characters)');
+        options.useUpperCaseCharacters = confirm('Would you like to include upper case characters)');
+        options.useSpecialCharacters = confirm('Would you like to include special characters)');
+
+        if (options.noCharacterTypeSelected()) {
+          alert('You must choose at least 1 character type. Please try again');
+          continue;
+        }
+      }
     }
   }
-
-  console.log(options);
-
-
 
   return inputNumberOfCharacters;
 }
