@@ -88,12 +88,18 @@ let upperCasedCharacters = [
   'Z'
 ];
 
+
+
 // Password generation options
 let options = {
   numberOfCharacters: 0,
+  useNumericCharacters: false,
   useLowerCaseCharacters: false,
   useUpperCaseCharacters: false,
   useSpecialCharacters: false,
+  inputNotEntered: function(input) {
+    return input === '';
+  },
   inputIsNotANumber: function(input) {
     return isNaN(input);
   },
@@ -103,51 +109,61 @@ let options = {
   lengthIsTooLong: function(input) {
     return input > 64;
   },
+  invalidInput: function() {
+    return this.inputNotEntered || this.inputIsNotANumber || this.lengthIsTooShort || this.lengthIsTooLong;
+  },
+  noCharacterTypeSelected: function() {
+    return !this.useLowerCaseCharacters && !this.useUpperCaseCharacters && !this.useSpecialCharacters && !this.useNumericCharacters;
+  }
 };
 
 // Function to prompt user for password options
 function getPasswordOptions() {
   inputNumberOfCharacters = prompt('Please choose the number of characters for your password (between 10 and 64 inclusive)');
 
-  if (options.inputIsNotANumber(inputNumberOfCharacters)) {
-    alert('You did not enter a number');
+  if (options.inputNotEntered(inputNumberOfCharacters)) {
+    alert('You did not enter a enter a value for the number of characters. Please try again');
+    return;
+  } else if (options.inputIsNotANumber(inputNumberOfCharacters)) {
+    alert('You did not enter a number. Please try again');
     return;
   } else if (options.lengthIsTooShort(inputNumberOfCharacters)) {
-    alert('Your password must be at least 10 characters');
+    alert('Your password must be at least 10 characters. Please try again');
     return;
   } else if (options.lengthIsTooLong(inputNumberOfCharacters)) {
-    alert('Your password must be less than 65 characters');
-    return
+    alert('Your password must be less than 65 characters. Please try again');
+    return;
+  } else {
+    options.numberOfCharacters = inputNumberOfCharacters;
   }
-  options.useLowerCaseCharacters = confirm('Would you like to include lower case characters)');
-  options.useUpperCaseCharacters = confirm('Would you like to include upper case characters)');
-  options.useSpecialCharacters = confirm('Would you like to include special characters)');
+
+  while(options.noCharacterTypeSelected()) {
+    options.useNumericCharacters = confirm('Would you like to include numeric characters)');
+    options.useLowerCaseCharacters = confirm('Would you like to include lower case characters)');
+    options.useUpperCaseCharacters = confirm('Would you like to include upper case characters)');
+    options.useSpecialCharacters = confirm('Would you like to include special characters)');
+
+    if (options.noCharacterTypeSelected()) {
+      alert('You must choose at least 1 character type. Please try again');
+      continue;
+    }
+  }
+
+  console.log(options);
+
+
+
+  return inputNumberOfCharacters;
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  count = options.numberOfCharacters;
 }
 
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions();
-  console.log(options);
-
-  // (1) prompt the user to:
-  //    a) choose a password length between 10 and 64 characters inclusive
-  //    b) choose if they want to include lowercase characters
-  //    c) choose if they want to include uppercase characters
-  //    d) choose if they want to include numeric characters
-  //    e) choose if they want to include special characters
-
-  // (2) validate the input
-  //    a) validate that the password length between 10 and 64 characters inclusive
-  //    b) validate that at least 1 type of character type is selected
-
-  // (3) Generate the password
-
-  // (4) alert the user of their password
 
   return `You chose ${options.numberOfCharacters} characters`;
 }
