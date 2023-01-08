@@ -88,8 +88,6 @@ let upperCasedCharacters = [
   'Z'
 ];
 
-
-
 // Password generation options
 let options = {
   numberOfCharacters: 0,
@@ -122,6 +120,11 @@ function getPasswordOptions() {
   while(options.noCharacterTypeSelected()) {
     inputNumberOfCharacters = prompt('Please choose the number of characters for your password (between 10 and 64 inclusive)');
 
+    // let the user quit the programme
+    if (!inputNumberOfCharacters) {
+      return;
+    }
+
     if (options.inputNotEntered(inputNumberOfCharacters)) {
       alert('You did not enter a enter a value for the number of characters. Please try again');
       continue;
@@ -138,9 +141,21 @@ function getPasswordOptions() {
       options.numberOfCharacters = inputNumberOfCharacters;
       while(options.noCharacterTypeSelected()) {
         options.useNumericCharacters = confirm('Would you like to include numeric characters)');
+        if (options.useNumericCharacters) {
+          chosenCharactersArray.push(numericCharacters);
+        }
         options.useLowerCaseCharacters = confirm('Would you like to include lower case characters)');
+        if (options.useLowerCaseCharacters) {
+          chosenCharactersArray.push(lowerCasedCharacters);
+        }
         options.useUpperCaseCharacters = confirm('Would you like to include upper case characters)');
+        if (options.useUpperCaseCharacters) {
+          chosenCharactersArray.push(upperCasedCharacters);
+        }
         options.useSpecialCharacters = confirm('Would you like to include special characters)');
+        if (options.useSpecialCharacters) {
+          chosenCharactersArray.push(specialCharacters);
+        }
 
         if (options.noCharacterTypeSelected()) {
           alert('You must choose at least 1 character type. Please try again');
@@ -155,14 +170,28 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  count = options.numberOfCharacters;
+  return arr[Math.floor(Math.random() * arr.length)];
 }
+
+let chosenCharactersArray = [];
 
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions();
 
-  return `You chose ${options.numberOfCharacters} characters`;
+  password = '';
+
+  while (options.numberOfCharacters > 0) {
+    chosenCharactersArray.forEach(arr => {
+      if (options.numberOfCharacters > 0) {
+        password += getRandom(arr);
+      }
+
+      options.numberOfCharacters -= 1;
+    })
+  }
+
+  return (`Your secure password is ${password}`);
 }
 
 // Get references to the #generate element
@@ -179,4 +208,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
-console.log(options);
+console.log(chosenCharactersArray);
