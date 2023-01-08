@@ -120,11 +120,6 @@ function getPasswordOptions() {
   while(options.noCharacterTypeSelected()) {
     inputNumberOfCharacters = prompt('Please choose the number of characters for your password (between 10 and 64 inclusive)');
 
-    // let the user quit the programme
-    if (!inputNumberOfCharacters) {
-      return;
-    }
-
     if (options.inputNotEntered(inputNumberOfCharacters)) {
       alert('You did not enter a enter a value for the number of characters. Please try again');
       continue;
@@ -207,5 +202,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
-
-console.log(chosenCharactersArray);
