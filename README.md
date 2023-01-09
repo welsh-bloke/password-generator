@@ -2,78 +2,87 @@
 
 ## Overview
 
-This week’s challenge requires you to create an application that an employee can use to generate a random password based on criteria they’ve selected by modifying starter code. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean and polished user interface that is responsive, ensuring that it adapts to multiple screen sizes.
+This web app was created for the purpose of gaining experience writing advanced JavaScript. The application alows the user
+to generate a random password based on the following criteria:
 
-The password can include special characters. If you’re unfamiliar with these, see this [list of Password Special Characters from the OWASP Foundation](https://www.owasp.org/index.php/Password_special_characters).
+- [The number of characters required for the password]
+- [If the user wants to include numeric characters]
+- [If the user wants to include lower case characters]
+- [If the user wants to include upper case characters]
+- [If the user wants to include special characters]
 
-## Instructions
+The app also validates the user input by ensuring that:
 
-The following image shows the web application's appearance and functionality:
+- [The user enters a number between 10 and 64 inclusive]
+- [The user choosed at least one character type]
 
-![password generator demo](./assets/05-javascript-challenge-demo.png)
+The application uses the following prompts to guide the user through the process of generating a secure password:
 
+## Initial screen Screen
 
-* Generate a password when the button is clicked
-  * Present a series of prompts for password criteria
-    * Length of password
-      * At least 10 characters but no more than 64.
-    * Character types
-      * Lowercase
-      * Uppercase
-      * Numeric
-      * Special characters ($@%&*, etc)
-  * Code should validate for each input and at least one character type should be selected
-  * Once prompts are answered then the password should be generated and displayed in an alert or written to the page
+<img src="./img/initial.png" width="600">
 
-## Grading Requirements
+## Number of characters option screen
 
-This challenge is graded based on the following criteria: 
+<img src="./img/chooseNumberOfCharacters.png" width="600">
 
-### Technical Acceptance Criteria: 40%
+## Use Numerical characters option screen
 
-* Satisfies all of the above acceptance criteria plus the following:
+<img src="./img/useNumericCharacters.png" width="600">
 
-  * The challenge should not produce any errors in the console when you inspect it using Chrome DevTools.
+## Use Uppercase characters option screen
 
-### Deployment: 32%
+<img src="./img/useUppercaseCharacters.png" width="600">
 
-* Application deployed at live URL.
+## Use Lowercase characters option screen
 
-* Application loads with no errors.
+<img src="./img/useLowercaseCharacters.png" width="600">
 
-* Application GitHub URL submitted.
+## Use Special characters option screen
 
-* GitHub repository that contains application code.
+<img src="./img/useSpecialCharacters.png" width="600">
 
-### Application Quality: 15%
+## Display password screen
 
-* Application user experience is intuitive and easy to navigate.
+<img src="./img/displayPassword.png" width="600">
 
-* Application user interface style is clean and polished.
+## Validation Errors: Empty value for number of characters screen
 
-* Application resembles the mock-up functionality provided in the challenge instructions.
+<img src="./img/emptyValue.png" width="600">
 
-### Repository Quality: 13%
+## Validation Errors: Invalid data type
 
-* Repository has a unique name.
+<img src="./img/NaN.png" width="600">
 
-* Repository follows best practices for file structure and naming conventions.
+## Validation Errors: Number of characters too short
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+<img src="./img/tooShort.png" width="600">
 
-* Repository contains multiple descriptive commit messages.
+## Validation Errors: Number of characters too long
 
-* Repository contains quality README file with description, screenshot, and link to deployed application.
+<img src="./img/tooLong.png" width="600">
 
+## Validation Errors: No character type chosen
 
-## Review
+<img src="./img/noCaracterTypeChosen.png" width="600">
 
-You are required to submit the following for review:
+## Deployment
 
-* The URL of the deployed application.
+The application wa deployed to GitHub Pages using the following process:
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+- [Pushing the refactored files to a remote repository]
+- [From the repository, select the Settings tab on the right side of the page]
+- [In the section labeled Source, select the `main` branch as your source]
+- [Click 'save']
+- [The app is now available on GitHub Pages (see 'usage' below for access details)]
 
----
+## Usage
 
-© 2022 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+To view the app visit:
+
+https://welsh-bloke.github.io/password-generator/
+
+## License
+
+![GitHub](https://img.shields.io/github/license/welsh-bloke/prework-study-guide?logo=GitHub&style=flat-square)
+Please refer to the LICENSE in the repo.

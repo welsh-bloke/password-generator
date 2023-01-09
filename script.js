@@ -168,6 +168,7 @@ function getRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+// Array to hold user choices
 let chosenCharactersArray = [];
 
 // Function to generate password with user input
